@@ -218,7 +218,8 @@ out:
 				goto out;
 			}
 
-			*incomingMessage = dict;
+			// +process: returns an autoreleased dictionary, but callers own what the pipe calls give them and release it
+			*incomingMessage = [dict retain];
 
 			status = 0;
 		} else {
@@ -261,7 +262,8 @@ out:
 				goto out;
 			}
 
-			*incomingMessage = dict;
+			// +process: returns an autoreleased dictionary, but callers own what the pipe calls give them and release it
+			*incomingMessage = [dict retain];
 			*replyPort = header->msgh_local_port;
 
 			status = 0;
@@ -600,7 +602,8 @@ retry:
 					goto out;
 				}
 
-				*reply = dict;
+				// +process: returns an autoreleased dictionary, but callers own what the pipe calls give them and release it
+				*reply = [dict retain];
 
 				status = 0;
 			} else {
